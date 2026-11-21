@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Guía de Cobro Automático</title>
+<style>
+  :root{
+    --ink:#1B2A2F; --muted:#5B6B70; --line:#D9E2E1; --bg:#FFFFFF; --soft:#F3F7F6;
+    --teal:#0E7C70; --teal-soft:#E3F3F0; --indigo:#3F4FB3; --indigo-soft:#E8EAF8;
+    --amber:#B7791F; --amber-soft:#FDF3E1; --green:#2F855A;
+  }
+  @page{ size:Letter; margin:0 }
+  *{ box-sizing:border-box }
+  html,body{ margin:0; padding:0; background:var(--bg); color:var(--ink);
+    font-family:Inter, "Liberation Sans", Arial, sans-serif; font-size:12.5px; line-height:1.5;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact }
+  .page{ width:8.5in; height:11in; padding:0.6in 0.65in 0.55in; position:relative;
+    page-break-after:always; overflow:hidden }
+  .page:last-child{ page-break-after:auto }
+  .kicker{ font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--teal); font-weight:700; margin:0 0 6px }
+  h1{ font-size:34px; line-height:1.12; margin:0 0 12px; letter-spacing:-.02em }
+  h2{ font-size:24px; line-height:1.2; margin:0 0 6px; letter-spacing:-.01em }
+  h3{ font-size:15px; margin:18px 0 6px }
+  p{ margin:0 0 10px }
+  .lead{ font-size:14px; color:var(--muted); margin-bottom:18px }
+  .footer{ position:absolute; left:0.65in; right:0.65in; bottom:0.3in; display:flex; justify-content:space-between;
+    font-size:10px; color:var(--muted); border-top:1px solid var(--line); padding-top:6px }
+  .box{ border-radius:12px; padding:14px 16px; margin:12px 0 }
+  .box.soft{ background:var(--soft) }
+  .box.teal{ background:var(--teal-soft); border-left:5px solid var(--teal) }
+  .box.indigo{ background:var(--indigo-soft); border-left:5px solid var(--indigo) }
+  .box.amber{ background:var(--amber-soft); border-left:5px solid var(--amber) }
+  .box h4{ margin:0 0 6px; font-size:13.5px }
+  .box p:last-child, .box ul:last-child{ margin-bottom:0 }
+  ul{ margin:0 0 10px; padding-left:18px } li{ margin:3px 0 }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:14px }
+  table{ width:100%; border-collapse:collapse; font-size:12px; margin:10px 0 }
+  th,td{ text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top }
+  th{ background:var(--soft); font-size:11.5px }
+  .tag{ display:inline-block; font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:99px }
+  .tag.teal{ background:var(--teal-soft); color:var(--teal) }
+  .tag.indigo{ background:var(--indigo-soft); color:var(--indigo) }
+  .tag.amber{ background:var(--amber-soft); color:var(--amber) }
+  .check{ list-style:none; padding-left:0 }
+  .check li{ position:relative; padding-left:24px; margin:6px 0 }
+  .check li::before{ content:""; position:absolute; left:0; top:2px; width:13px; height:13px; border:1.6px solid var(--teal); border-radius:3px }
+  .card{ border:1px solid var(--line); border-radius:12px; padding:14px 16px }
+  .card h4{ margin:0 0 8px; font-size:14px; display:flex; align-items:center; gap:8px }
+  .quote{ font-size:13px; font-style:italic; background:var(--soft); border-radius:12px; padding:14px 18px; border-left:5px solid var(--teal) }
+  .small{ font-size:11px; color:var(--muted) }
+  svg text{ font-family:Inter, "Liberation Sans", Arial, sans-serif }
+  .steps{ list-style:none; padding:0; margin:14px 0 0; counter-reset:s }
+  .steps li{ position:relative; padding:0 0 14px 46px; margin:0; counter-increment:s }
+  .steps li::before{ content:counter(s); position:absolute; left:0; top:0; width:30px; height:30px; border-radius:50%;
+    background:var(--teal); color:#fff; font-weight:700; display:flex; align-items:center; justify-content:center; font-size:13px }
+  .steps li::after{ content:""; position:absolute; left:14px; top:32px; bottom:2px; width:2px; background:var(--line) }
+  .steps li:last-child::after{ display:none }
+  .steps b{ font-size:13.5px }
+  .who{ font-size:10.5px; font-weight:700; margin-left:6px }
+</style>
+</head>
+<body>
+
+<!-- ============ PÁGINA 1: PORTADA ============ -->
+<section class="page">
+  <p class="kicker">Guía para el cliente</p>
+  <h1>Cobro automático en su página web</h1>
+  <p class="lead">Qué necesita para que sus clientes paguen una vez y, a partir de ahí, se les cobre solo cada mes, con el dinero depositado en su cuenta de <b>BHD</b> o <b>Scotiabank</b>.</p>
+
+  <svg viewBox="0 0 704 300" width="100%" role="img" aria-label="Cliente paga en la web, el cobro se repite cada mes y el dinero llega al banco">
+    <defs>
+      <marker id="ar1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0E7C70"/></marker>
+    </defs>
+    <rect x="0" y="0" width="704" height="300" rx="18" fill="#F3F7F6"/>
+    <!-- Ventana web -->
+    <rect x="34" y="52" width="210" height="170" rx="12" fill="#fff" stroke="#D9E2E1" stroke-width="1.5"/>
+    <rect x="34" y="52" width="210" height="26" rx="12" fill="#E3F3F0"/>
+    <rect x="34" y="66" width="210" height="12" fill="#E3F3F0"/>
+    <circle cx="50" cy="65" r="4" fill="#F08A7E"/><circle cx="63" cy="65" r="4" fill="#F2C14E"/><circle cx="76" cy="65" r="4" fill="#6BC59A"/>
+    <text x="54" y="108" font-size="15" font-weight="700" fill="#1B2A2F">Plan mensual</text>
+    <text x="54" y="130" font-size="12" fill="#5B6B70">Consulta + seguimiento</text>
+    <text x="54" y="160" font-size="20" font-weight="800" fill="#0E7C70">RD$ 0,000</text>
+    <rect x="54" y="176" width="150" height="30" rx="8" fill="#0E7C70"/>
+    <text x="129" y="196" font-size="12.5" font-weight="700" fill="#fff" text-anchor="middle">Suscribirme</text>
+    <!-- Tarjeta -->
+    <g transform="translate(190,180) rotate(-8)">
+      <rect width="96" height="60" rx="8" fill="#3F4FB3"/>
+      <rect x="10" y="14" width="18" height="13" rx="3" fill="#F2C14E"/>
+      <rect x="10" y="38" width="60" height="6" rx="3" fill="#C9CFF0"/>
+    </g>
+    <!-- Ciclo -->
+    <circle cx="380" cy="140" r="62" fill="none" stroke="#0E7C70" stroke-width="4" stroke-dasharray="300 90" marker-end="url(#ar1)" transform="rotate(-60 380 140)"/>
+    <text x="380" y="132" font-size="14" font-weight="800" fill="#1B2A2F" text-anchor="middle">Cada mes</text>
+    <text x="380" y="152" font-size="12" fill="#5B6B70" text-anchor="middle">automático</text>
+    <line x1="262" y1="140" x2="306" y2="140" stroke="#0E7C70" stroke-width="3" marker-end="url(#ar1)"/>
+    <line x1="454" y1="140" x2="508" y2="140" stroke="#0E7C70" stroke-width="3" marker-end="url(#ar1)"/>
+    <!-- Banco -->
+    <g transform="translate(528,62)">
+      <polygon points="70,0 140,34 0,34" fill="#1B2A2F"/>
+      <rect x="6" y="38" width="128" height="8" fill="#1B2A2F"/>
+      <rect x="16" y="52" width="14" height="66" fill="#5B6B70"/><rect x="45" y="52" width="14" height="66" fill="#5B6B70"/>
+      <rect x="81" y="52" width="14" height="66" fill="#5B6B70"/><rect x="110" y="52" width="14" height="66" fill="#5B6B70"/>
+      <rect x="0" y="122" width="140" height="10" fill="#1B2A2F"/>
+      <text x="70" y="160" font-size="13" font-weight="700" fill="#1B2A2F" text-anchor="middle">Su cuenta</text>
+      <text x="70" y="178" font-size="12" fill="#5B6B70" text-anchor="middle">BHD o Scotiabank</text>
+    </g>
+    <text x="139" y="262" font-size="12" fill="#5B6B70" text-anchor="middle">1. Su cliente paga una vez</text>
+    <text x="380" y="262" font-size="12" fill="#5B6B70" text-anchor="middle">2. Se repite solo</text>
+    <text x="598" y="262" font-size="12" fill="#5B6B70" text-anchor="middle">3. Usted recibe el dinero</text>
+  </svg>
+
+  <div class="box teal" style="margin-top:22px">
+    <h4>En un minuto</h4>
+    <ul>
+      <li>Para cobrar con tarjeta en internet necesita una <b>pasarela de pago</b>. En República Dominicana las dos principales son <b>CardNET</b> y <b>AZUL</b>.</li>
+      <li>Usted <b>no necesita cambiar de banco</b>. El dinero puede llegar a su cuenta de BHD o Scotiabank.</li>
+      <li>Su parte es <b>la solicitud y los documentos</b>. La mía es <b>la página web y la conexión técnica</b>.</li>
+      <li>Mi recomendación: <b>empezar con CardNET a través de BHD</b>, porque BHD ya la ofrece a sus clientes.</li>
+    </ul>
+  </div>
+
+  <div class="footer"><span>Guía de cobro automático · Noviembre 2026</span><span>1 / 7</span></div>
+</section>
+
+<!-- ============ PÁGINA 2: CÓMO FUNCIONA ============ -->
+<section class="page">
+  <p class="kicker">Paso 1 · Entender</p>
+  <h2>¿Cómo funciona el cobro automático?</h2>
+  <p class="lead">Su cliente pone la tarjeta una sola vez. Después, el sistema cobra solo en la fecha acordada.</p>
+
+  <svg viewBox="0 0 704 210" width="100%" role="img" aria-label="Cuatro pasos del cobro automático">
+    <defs>
+      <marker id="ar2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5B6B70"/></marker>
+    </defs>
+    <g font-size="12" fill="#1B2A2F" text-anchor="middle">
+      <!-- 1 -->
+      <rect x="0" y="10" width="152" height="190" rx="14" fill="#E3F3F0"/>
+      <circle cx="76" cy="58" r="30" fill="#fff"/>
+      <rect x="58" y="46" width="36" height="24" rx="4" fill="#3F4FB3"/><rect x="62" y="52" width="8" height="6" rx="1" fill="#F2C14E"/>
+      <text x="76" y="112" font-weight="800" font-size="13">1. Se suscribe</text>
+      <text x="76" y="134">Su cliente elige el plan</text>
+      <text x="76" y="150">y paga el primer mes</text>
+      <text x="76" y="166">con su tarjeta.</text>
+      <line x1="156" y1="105" x2="180" y2="105" stroke="#5B6B70" stroke-width="2" marker-end="url(#ar2)"/>
+      <!-- 2 -->
+      <rect x="184" y="10" width="152" height="190" rx="14" fill="#E8EAF8"/>
+      <circle cx="260" cy="58" r="30" fill="#fff"/>
+      <path d="M260,36 l18,7 v14 c0,12 -8,20 -18,24 c-10,-4 -18,-12 -18,-24 v-14 z" fill="#3F4FB3"/>
+      <path d="M252,58 l6,6 l11,-12" stroke="#fff" stroke-width="3" fill="none"/>
+      <text x="260" y="112" font-weight="800" font-size="13">2. Se guarda seguro</text>
+      <text x="260" y="134">La pasarela guarda la</text>
+      <text x="260" y="150">tarjeta como un código</text>
+      <text x="260" y="166">secreto (token).</text>
+      <line x1="340" y1="105" x2="364" y2="105" stroke="#5B6B70" stroke-width="2" marker-end="url(#ar2)"/>
+      <!-- 3 -->
+      <rect x="368" y="10" width="152" height="190" rx="14" fill="#E3F3F0"/>
+      <circle cx="444" cy="58" r="30" fill="#fff"/>
+      <rect x="426" y="42" width="36" height="32" rx="4" fill="#fff" stroke="#0E7C70" stroke-width="2.5"/>
+      <rect x="426" y="42" width="36" height="9" fill="#0E7C70"/>
+      <text x="444" y="70" font-size="13" font-weight="800" fill="#0E7C70">1</text>
+      <text x="444" y="112" font-weight="800" font-size="13">3. Cobro mensual</text>
+      <text x="444" y="134">Cada mes se cobra</text>
+      <text x="444" y="150">solo usando el token,</text>
+      <text x="444" y="166">sin pedir la tarjeta.</text>
+      <line x1="524" y1="105" x2="548" y2="105" stroke="#5B6B70" stroke-width="2" marker-end="url(#ar2)"/>
+      <!-- 4 -->
+      <rect x="552" y="10" width="152" height="190" rx="14" fill="#E8EAF8"/>
+      <circle cx="628" cy="58" r="30" fill="#fff"/>
+      <polygon points="628,38 648,50 608,50" fill="#1B2A2F"/>
+      <rect x="612" y="53" width="5" height="16" fill="#5B6B70"/><rect x="622" y="53" width="5" height="16" fill="#5B6B70"/>
+      <rect x="630" y="53" width="5" height="16" fill="#5B6B70"/><rect x="639" y="53" width="5" height="16" fill="#5B6B70"/>
+      <rect x="606" y="71" width="44" height="5" fill="#1B2A2F"/>
+      <text x="628" y="112" font-weight="800" font-size="13">4. Le depositan</text>
+      <text x="628" y="134">El dinero (menos la</text>
+      <text x="628" y="150">comisión) llega a su</text>
+      <text x="628" y="166">cuenta BHD o Scotia.</text>
+    </g>
+  </svg>
+
+  <h3>¿Qué es un "token" y por qué es seguro?</h3>
+  <svg viewBox="0 0 704 120" width="100%" role="img" aria-label="La tarjeta se convierte en un token">
+    <defs>
+      <marker id="ar3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0E7C70"/></marker>
+    </defs>
+    <rect x="10" y="14" width="170" height="96" rx="12" fill="#3F4FB3"/>
+    <rect x="24" y="30" width="26" height="18" rx="3" fill="#F2C14E"/>
+    <text x="24" y="76" font-size="13" fill="#fff" font-family="JetBrains Mono, monospace">4512 •••• 7781</text>
+    <text x="24" y="96" font-size="10" fill="#C9CFF0">TARJETA REAL</text>
+    <line x1="192" y1="62" x2="262" y2="62" stroke="#0E7C70" stroke-width="3" marker-end="url(#ar3)"/>
+    <rect x="272" y="20" width="160" height="84" rx="14" fill="#E3F3F0"/>
+    <rect x="334" y="48" width="36" height="30" rx="5" fill="#0E7C70"/>
+    <path d="M340,48 v-8 a12,12 0 0 1 24,0 v8" stroke="#0E7C70" stroke-width="4" fill="none"/>
+    <text x="352" y="96" font-size="11" fill="#1B2A2F" text-anchor="middle" font-weight="700">Bóveda de la pasarela</text>
+    <line x1="442" y1="62" x2="512" y2="62" stroke="#0E7C70" stroke-width="3" marker-end="url(#ar3)"/>
+    <rect x="522" y="30" width="172" height="64" rx="12" fill="#fff" stroke="#0E7C70" stroke-width="2" stroke-dasharray="6 4"/>
+    <text x="608" y="60" font-size="13" fill="#0E7C70" text-anchor="middle" font-family="JetBrains Mono, monospace" font-weight="700">TK-9F3A…C21</text>
+    <text x="608" y="80" font-size="10.5" fill="#5B6B70" text-anchor="middle">Lo único que guarda su web</text>
+  </svg>
+  <div class="grid2" style="margin-top:8px">
+    <div class="box soft" style="margin:0">
+      <h4>Para usted</h4>
+      <p>Su página <b>nunca guarda el número de la tarjeta</b>. Si alguien entrara a la web, no encontraría tarjetas, solo códigos que no sirven fuera de la pasarela.</p>
+    </div>
+    <div class="box soft" style="margin:0">
+      <h4>Para su cliente</h4>
+      <p>No tiene que escribir la tarjeta cada mes. Recibe aviso del cobro y <b>puede cancelar cuando quiera</b> desde la web.</p>
+    </div>
+  </div>
+
+  <div class="box amber">
+    <h4>¿Y si un cobro falla?</h4>
+    <p>Si la tarjeta está vencida o no tiene fondos, el sistema avisa al cliente por email o WhatsApp, reintenta y, si sigue fallando, pausa el servicio. Todo eso lo programo en la página.</p>
+  </div>
+
+  <div class="footer"><span>Guía de cobro automático · Noviembre 2026</span><span>2 / 7</span></div>
+</section>
+
+<!-- ============ PÁGINA 3: CARDNET O AZUL ============ -->
+<section class="page">
+  <p class="kicker">Paso 2 · Elegir</p>
+  <h2>¿CardNET o AZUL?</h2>
+  <p class="lead">Las dos son empresas que procesan pagos con tarjeta. No reemplazan a su banco: cobran por usted y le depositan.</p>
+
+  <svg viewBox="0 0 704 272" width="100%" role="img" aria-label="Relación entre CardNET, AZUL y los bancos">
+    <rect x="0" y="0" width="704" height="272" rx="16" fill="#F3F7F6"/>
+    <!-- conexiones -->
+    <line x1="190" y1="88" x2="130" y2="168" stroke="#0E7C70" stroke-width="3"/>
+    <line x1="190" y1="88" x2="352" y2="168" stroke="#0E7C70" stroke-width="3"/>
+    <line x1="514" y1="88" x2="574" y2="168" stroke="#3F4FB3" stroke-width="3"/>
+    <line x1="514" y1="88" x2="130" y2="168" stroke="#3F4FB3" stroke-width="2.5" stroke-dasharray="7 6"/>
+    <line x1="514" y1="88" x2="352" y2="168" stroke="#3F4FB3" stroke-width="2.5" stroke-dasharray="7 6"/>
+    <!-- pasarelas -->
+    <rect x="100" y="26" width="180" height="62" rx="14" fill="#0E7C70"/>
+    <text x="190" y="56" font-size="18" font-weight="800" fill="#fff" text-anchor="middle">CardNET</text>
+    <text x="190" y="75" font-size="11" fill="#D6F0EB" text-anchor="middle">Mayor procesador del país</text>
+    <rect x="424" y="26" width="180" height="62" rx="14" fill="#3F4FB3"/>
+    <text x="514" y="56" font-size="18" font-weight="800" fill="#fff" text-anchor="middle">AZUL</text>
+    <text x="514" y="75" font-size="11" fill="#DDE1F7" text-anchor="middle">Del Grupo Popular</text>
+    <!-- bancos -->
+    <rect x="50" y="168" width="160" height="52" rx="12" fill="#fff" stroke="#1B2A2F" stroke-width="2"/>
+    <text x="130" y="192" font-size="15" font-weight="800" fill="#1B2A2F" text-anchor="middle">BHD</text>
+    <text x="130" y="209" font-size="10.5" fill="#5B6B70" text-anchor="middle">Su banco</text>
+    <rect x="272" y="168" width="160" height="52" rx="12" fill="#fff" stroke="#1B2A2F" stroke-width="2"/>
+    <text x="352" y="192" font-size="15" font-weight="800" fill="#1B2A2F" text-anchor="middle">Scotiabank</text>
+    <text x="352" y="209" font-size="10.5" fill="#5B6B70" text-anchor="middle">Su banco</text>
+    <rect x="494" y="168" width="160" height="52" rx="12" fill="#fff" stroke="#D9E2E1" stroke-width="2"/>
+    <text x="574" y="192" font-size="15" font-weight="800" fill="#5B6B70" text-anchor="middle">Banco Popular</text>
+    <text x="574" y="209" font-size="10.5" fill="#5B6B70" text-anchor="middle">No lo necesita</text>
+    <!-- leyenda -->
+    <line x1="190" y1="250" x2="220" y2="250" stroke="#1B2A2F" stroke-width="3"/>
+    <text x="226" y="254" font-size="11" fill="#1B2A2F">Relación directa</text>
+    <line x1="380" y1="250" x2="410" y2="250" stroke="#1B2A2F" stroke-width="2.5" stroke-dasharray="7 6"/>
+    <text x="416" y="254" font-size="11" fill="#1B2A2F">Puede depositar ahí (a confirmar)</text>
+  </svg>
+
+  <table>
+    <tr><th style="width:26%"></th><th style="width:37%"><span class="tag teal">CardNET</span></th><th><span class="tag indigo">AZUL</span></th></tr>
+    <tr><td><b>Relación con BHD</b></td><td>BHD la ofrece a sus clientes (botón de pago, POS virtual, e-commerce).</td><td>No es de BHD, pero puede depositar en su cuenta de BHD (confirmar).</td></tr>
+    <tr><td><b>Relación con Scotiabank</b></td><td>Alianza anunciada en noviembre de 2026 (American Express).</td><td>Puede depositar en su cuenta de Scotiabank (confirmar).</td></tr>
+    <tr><td><b>Guarda la tarjeta (token)</b></td><td>Sí: perfiles de cliente por API.</td><td>Sí: sistema "DataVault".</td></tr>
+    <tr><td><b>Cobro mensual automático</b></td><td>Sí: la web cobra cada mes con el token guardado.</td><td>Sí: su manual tiene una sección de suscripciones y recurrencia.</td></tr>
+    <tr><td><b>Dónde se pide</b></td><td>Con su ejecutivo de BHD, en Open BHD o en cardnet.com.do</td><td>azul.com.do → "Únete" o al <span style="white-space:nowrap">809-544-2985</span></td></tr>
+  </table>
+
+  <div class="box teal">
+    <h4>Recomendación</h4>
+    <p>Como usted ya trabaja con BHD, <b>empiece con CardNET a través de BHD</b>: es el camino más directo. Si las condiciones (comisión o tiempo de depósito) no le convienen, pida también una cotización a AZUL y comparamos. Mi parte técnica funciona con cualquiera de las dos.</p>
+  </div>
+
+  <div class="footer"><span>Guía de cobro automático · Noviembre 2026</span><span>3 / 7</span></div>
+</section>
+
+<!-- ============ PÁGINA 4: QUIÉN HACE QUÉ + RUTA ============ -->
+<section class="page">
+  <p class="kicker">Paso 3 · Organizarnos</p>
+  <h2>¿Quién hace qué?</h2>
+  <p class="lead">Podemos avanzar los dos en paralelo: usted con la solicitud y yo con la página web.</p>
+
+  <svg viewBox="0 0 704 270" width="100%" role="img" aria-label="Tareas del cliente y del desarrollador">
+    <rect x="0" y="0" width="344" height="270" rx="16" fill="#E3F3F0"/>
+    <rect x="360" y="0" width="344" height="270" rx="16" fill="#E8EAF8"/>
+    <!-- iconos -->
+    <circle cx="40" cy="38" r="18" fill="#0E7C70"/><circle cx="40" cy="32" r="6" fill="#fff"/><path d="M29,47 a11,9 0 0 1 22,0 z" fill="#fff"/>
+    <text x="68" y="44" font-size="16" font-weight="800" fill="#1B2A2F">Usted (cliente)</text>
+    <rect x="382" y="22" width="36" height="30" rx="5" fill="#3F4FB3"/><text x="400" y="43" font-size="13" font-weight="800" fill="#fff" text-anchor="middle">&lt;/&gt;</text>
+    <text x="430" y="44" font-size="16" font-weight="800" fill="#1B2A2F">Yo (desarrollo web)</text>
+    <g font-size="12.5" fill="#1B2A2F">
+      <g transform="translate(24,78)">
+        <g><circle cx="8" cy="-4" r="8" fill="#fff"/><path d="M4,-4 l3,3 l5,-6" stroke="#0E7C70" stroke-width="2" fill="none"/><text x="24" y="0">Tener el RNC activo</text></g>
+        <g transform="translate(0,30)"><circle cx="8" cy="-4" r="8" fill="#fff"/><path d="M4,-4 l3,3 l5,-6" stroke="#0E7C70" stroke-width="2" fill="none"/><text x="24" y="0">Cuenta en BHD o Scotiabank a su nombre</text></g>
+        <g transform="translate(0,60)"><circle cx="8" cy="-4" r="8" fill="#fff"/><path d="M4,-4 l3,3 l5,-6" stroke="#0E7C70" stroke-width="2" fill="none"/><text x="24" y="0">Reunir los documentos (página 5)</text></g>
+        <g transform="translate(0,90)"><circle cx="8" cy="-4" r="8" fill="#fff"/><path d="M4,-4 l3,3 l5,-6" stroke="#0E7C70" stroke-width="2" fill="none"/><text x="24" y="0">Solicitar a CardNET y/o AZUL</text></g>
+        <g transform="translate(0,120)"><circle cx="8" cy="-4" r="8" fill="#fff"/><path d="M4,-4 l3,3 l5,-6" stroke="#0E7C70" stroke-width="2" fill="none"/><text x="24" y="0">Firmar el contrato de afiliación</text></g>
+        <g transform="translate(0,150)"><circle cx="8" cy="-4" r="8" fill="#fff"/><path d="M4,-4 l3,3 l5,-6" stroke="#0E7C70" stroke-width="2" fill="none"/><text x="24" y="0">Pasarme las credenciales de forma</text><text x="24" y="16">segura (nunca por chat abierto)</text></g>
+      </g>
+      <g transform="translate(384,78)">
+        <g><circle cx="8" cy="-4" r="8" fill="#fff"/><path d="M4,-4 l3,3 l5,-6" stroke="#3F4FB3" stroke-width="2" fill="none"/><text x="24" y="0">Diseñar y crear la página web</text></g>
+        <g transform="translate(0,30)"><circle cx="8" cy="-4" r="8" fill="#fff"/><path d="M4,-4 l3,3 l5,-6" stroke="#3F4FB3" stroke-width="2" fill="none"/><text x="24" y="0">Redactar las políticas (privacidad,</text><text x="24" y="16">términos, cancelación)</text></g>
+        <g transform="translate(0,76)"><circle cx="8" cy="-4" r="8" fill="#fff"/><path d="M4,-4 l3,3 l5,-6" stroke="#3F4FB3" stroke-width="2" fill="none"/><text x="24" y="0">Conectar la pasarela y los tokens</text></g>
+        <g transform="translate(0,106)"><circle cx="8" cy="-4" r="8" fill="#fff"/><path d="M4,-4 l3,3 l5,-6" stroke="#3F4FB3" stroke-width="2" fill="none"/><text x="24" y="0">Programar el cobro mensual y avisos</text></g>
+        <g transform="translate(0,136)"><circle cx="8" cy="-4" r="8" fill="#fff"/><path d="M4,-4 l3,3 l5,-6" stroke="#3F4FB3" stroke-width="2" fill="none"/><text x="24" y="0">Hacer las pruebas y la certificación</text></g>
+        <g transform="translate(0,166)"><circle cx="8" cy="-4" r="8" fill="#fff"/><path d="M4,-4 l3,3 l5,-6" stroke="#3F4FB3" stroke-width="2" fill="none"/><text x="24" y="0">Publicar y acompañarle al inicio</text></g>
+      </g>
+    </g>
+  </svg>
+
+  <h3 style="margin-top:24px">La ruta completa</h3>
+  <svg viewBox="0 0 704 150" width="100%" role="img" aria-label="Cinco etapas del proyecto">
+    <line x1="60" y1="46" x2="644" y2="46" stroke="#D9E2E1" stroke-width="6" stroke-linecap="round"/>
+    <g text-anchor="middle" font-size="12" fill="#1B2A2F">
+      <circle cx="60" cy="46" r="24" fill="#0E7C70"/><text x="60" y="52" font-size="16" font-weight="800" fill="#fff">1</text>
+      <text x="60" y="94" font-weight="800">Preparar</text><text x="60" y="112" fill="#5B6B70">RNC y cuenta</text>
+      <circle cx="206" cy="46" r="24" fill="#0E7C70"/><text x="206" y="52" font-size="16" font-weight="800" fill="#fff">2</text>
+      <text x="206" y="94" font-weight="800">Solicitar</text><text x="206" y="112" fill="#5B6B70">Documentos</text>
+      <circle cx="352" cy="46" r="24" fill="#B7791F"/><text x="352" y="52" font-size="16" font-weight="800" fill="#fff">3</text>
+      <text x="352" y="94" font-weight="800">Aprobación</text><text x="352" y="112" fill="#5B6B70">1 a 6 semanas*</text>
+      <circle cx="498" cy="46" r="24" fill="#3F4FB3"/><text x="498" y="52" font-size="16" font-weight="800" fill="#fff">4</text>
+      <text x="498" y="94" font-weight="800">Web y pruebas</text><text x="498" y="112" fill="#5B6B70">En paralelo</text>
+      <circle cx="644" cy="46" r="24" fill="#2F855A"/><path d="M633,46 l8,8 l14,-16" stroke="#fff" stroke-width="3.5" fill="none"/>
+      <text x="644" y="94" font-weight="800">¡En vivo!</text><text x="644" y="112" fill="#5B6B70">Cobros reales</text>
+    </g>
+  </svg>
+  <p class="small">* Tiempo estimado según fuentes públicas: va de 5 a 15 días hábiles hasta varias semanas, según el proveedor y qué tan completos estén los documentos.</p>
+
+  <div class="footer"><span>Guía de cobro automático · Noviembre 2026</span><span>4 / 7</span></div>
+</section>
+
+<!-- ============ PÁGINA 5: DOCUMENTOS ============ -->
+<section class="page">
+  <p class="kicker">Paso 4 · Documentos</p>
+  <h2>Lo que le van a pedir</h2>
+  <p class="lead">Depende de si se afilia como <b>persona física</b> (a su nombre) o como <b>empresa</b> (SRL o similar). Marque lo que ya tiene.</p>
+
+  <div class="box soft" style="margin-top:0">
+    <h4>Base para cualquiera de las dos</h4>
+    <ul class="check" style="margin:0">
+      <li><b>RNC activo en la DGII.</b> Si no lo tiene como persona física: formulario RC-01 y copia de la cédula por ambos lados. Se puede hacer en línea en la Oficina Virtual de la DGII.</li>
+      <li><b>Cuenta bancaria a su nombre</b> o al de la empresa, en BHD o Scotiabank. El titular de la cuenta debe ser el mismo que solicita.</li>
+    </ul>
+  </div>
+
+  <div class="grid2">
+    <div class="card" style="border-top:5px solid var(--teal)">
+      <h4><span class="tag teal">CardNET</span> Persona física</h4>
+      <ul class="check">
+        <li>Copia de la cédula del propietario</li>
+        <li>Estado de cuenta de la cuenta para depósitos</li>
+        <li>Contrato de alquiler o título del local <span class="small">(si trabaja desde casa o solo en línea, pregunte qué aceptan)</span></li>
+      </ul>
+      <h4 style="margin-top:12px"><span class="tag teal">CardNET</span> Empresa</h4>
+      <ul class="check" style="margin-bottom:0">
+        <li>Registro Mercantil actualizado</li>
+        <li>Última acta de asamblea</li>
+        <li>Estatutos</li>
+        <li>Cédula del gerente o apoderado que firma</li>
+        <li>Estado de cuenta o cheque de la cuenta para depósitos</li>
+      </ul>
+    </div>
+    <div class="card" style="border-top:5px solid var(--indigo)">
+      <h4><span class="tag indigo">AZUL</span> Persona física</h4>
+      <ul class="check">
+        <li>Formulario de Gestión de Prospecto</li>
+        <li>Autorización de buró de crédito (1 firmante)</li>
+        <li>Copia de cédula o pasaporte</li>
+        <li>Contrato de afiliación</li>
+      </ul>
+      <h4 style="margin-top:12px"><span class="tag indigo">AZUL</span> Empresa</h4>
+      <ul class="check" style="margin-bottom:0">
+        <li>Formulario de Gestión de Prospecto</li>
+        <li>Autorización de buró (1 o 2 firmantes)</li>
+        <li>Registro Mercantil vigente</li>
+        <li>Cédula de todos los socios</li>
+        <li>Comprobante de la cuenta bancaria</li>
+        <li>Fotos del comercio <span class="small">(pregunte qué aceptan si es solo en línea)</span></li>
+        <li>Contrato de afiliación</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="box amber">
+    <h4>Consejo</h4>
+    <p>Escanee todo en PDF legible antes de llamar. Con los documentos completos la aprobación va más rápido. El oficial de negocios le confirmará la lista exacta, que puede cambiar.</p>
+  </div>
+
+  <div class="footer"><span>Guía de cobro automático · Noviembre 2026</span><span>5 / 7</span></div>
+</section>
+
+<!-- ============ PÁGINA 6: QUÉ DECIR ============ -->
+<section class="page">
+  <p class="kicker">Paso 5 · Solicitar</p>
+  <h2>Qué decir cuando llame o escriba</h2>
+  <p class="lead">Es importante pedir exactamente esto. Si solo pide "botón de pago", le pueden dar una versión que <b>no</b> permite el cobro automático.</p>
+
+  <div class="quote">
+    "Quiero afiliar mi negocio para <b>comercio electrónico</b> (pagos en mi página web, no un POS físico). Necesito <b>integración por API</b> con <b>tokenización de tarjetas</b> y <b>cobros recurrentes sin el cliente presente</b>, para suscripciones mensuales. Quiero los depósitos en mi cuenta de <b>[BHD / Scotiabank]</b>. También necesito las credenciales del <b>ambiente de pruebas</b> para mi desarrollador."
+  </div>
+
+  <h3>Preguntas que debe hacer (y anotar la respuesta)</h3>
+  <svg viewBox="0 0 704 260" width="100%" role="img" aria-label="Seis preguntas clave">
+    <g font-size="12.5" fill="#1B2A2F">
+      <g>
+        <rect x="0" y="0" width="344" height="76" rx="12" fill="#F3F7F6"/>
+        <text x="20" y="34" font-size="22" font-weight="800" fill="#0E7C70">%</text>
+        <text x="52" y="28" font-weight="800">¿Cuál es la comisión?</text>
+        <text x="52" y="47">Por pago en línea y por cobro recurrente.</text>
+        <text x="52" y="64" fill="#5B6B70">¿Hay mensualidad o costo de instalación?</text>
+      </g>
+      <g transform="translate(360,0)">
+        <rect x="0" y="0" width="344" height="76" rx="12" fill="#F3F7F6"/>
+        <text x="20" y="34" font-size="22" font-weight="800" fill="#0E7C70">$</text>
+        <text x="52" y="28" font-weight="800">¿Cuándo me depositan?</text>
+        <text x="52" y="47">¿En cuántos días llega a BHD o Scotiabank?</text>
+        <text x="52" y="64" fill="#5B6B70">¿Cuesta algo depositar en otro banco?</text>
+      </g>
+      <g transform="translate(0,90)">
+        <rect x="0" y="0" width="344" height="76" rx="12" fill="#F3F7F6"/>
+        <text x="16" y="34" font-size="20" font-weight="800" fill="#0E7C70">↻</text>
+        <text x="52" y="28" font-weight="800">¿Cómo es el cobro mensual?</text>
+        <text x="52" y="47">¿Lo programan ustedes o lo envía mi web?</text>
+        <text x="52" y="64" fill="#5B6B70">¿Se puede cobrar sin pedir el CVV?</text>
+      </g>
+      <g transform="translate(360,90)">
+        <rect x="0" y="0" width="344" height="76" rx="12" fill="#F3F7F6"/>
+        <text x="18" y="34" font-size="20" font-weight="800" fill="#0E7C70">⏱</text>
+        <text x="52" y="28" font-weight="800">¿Cuánto tarda la aprobación?</text>
+        <text x="52" y="47">¿Y la certificación técnica de la web?</text>
+        <text x="52" y="64" fill="#5B6B70">¿Quién es mi contacto técnico?</text>
+      </g>
+      <g transform="translate(0,180)">
+        <rect x="0" y="0" width="344" height="76" rx="12" fill="#F3F7F6"/>
+        <text x="20" y="34" font-size="20" font-weight="800" fill="#0E7C70">⌂</text>
+        <text x="52" y="28" font-weight="800">¿Y si no tengo local?</text>
+        <text x="52" y="47">Si vendo solo en línea, ¿qué aceptan en</text>
+        <text x="52" y="64" fill="#5B6B70">lugar de contrato o fotos del local?</text>
+      </g>
+      <g transform="translate(360,180)">
+        <rect x="0" y="0" width="344" height="76" rx="12" fill="#F3F7F6"/>
+        <text x="20" y="34" font-size="20" font-weight="800" fill="#0E7C70">✓</text>
+        <text x="52" y="28" font-weight="800">¿Qué tarjetas aceptan?</text>
+        <text x="52" y="47">Visa, Mastercard, American Express…</text>
+        <text x="52" y="64" fill="#5B6B70">¿Y tarjetas extranjeras?</text>
+      </g>
+    </g>
+  </svg>
+
+  <div class="grid2" style="margin-top:14px">
+    <div class="card" style="border-top:5px solid var(--teal)">
+      <h4><span class="tag teal">CardNET</span> Dónde pedirlo</h4>
+      <ul style="margin:0">
+        <li>Con su <b>ejecutivo de BHD</b></li>
+        <li>Plataforma <b>Open BHD</b> → Comercio</li>
+        <li><b>cardnet.com.do</b> → "Afíliate"</li>
+      </ul>
+    </div>
+    <div class="card" style="border-top:5px solid var(--indigo)">
+      <h4><span class="tag indigo">AZUL</span> Dónde pedirlo</h4>
+      <ul style="margin:0">
+        <li><b>azul.com.do</b> → "Únete"</li>
+        <li>Teléfono <b>809-544-2985</b></li>
+        <li>Un oficial de negocios le contactará</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer"><span>Guía de cobro automático · Noviembre 2026</span><span>6 / 7</span></div>
+</section>
+
+<!-- ============ PÁGINA 7: WEB + NOTAS ============ -->
+<section class="page">
+  <p class="kicker">Paso 6 · La página web</p>
+  <h2>Lo que la pasarela revisa en su web</h2>
+  <p class="lead">Su página todavía no existe, y eso está bien: <b>la construyo yo cumpliendo todo esto</b>. CardNET o AZUL la revisan antes de activar los cobros reales.</p>
+
+  <div class="grid2">
+    <ul class="check" style="margin:0">
+      <li>Dominio propio y conexión segura (candado <b>HTTPS</b>)</li>
+      <li>Descripción clara de los servicios y planes</li>
+      <li>Precios en <b>RD$</b></li>
+      <li>Datos de contacto visibles: teléfono, email y dirección</li>
+    </ul>
+    <ul class="check" style="margin:0">
+      <li>Política de privacidad</li>
+      <li>Términos y condiciones</li>
+      <li>Política de reembolsos y cancelación</li>
+      <li>En la suscripción: <b>cuánto, cada cuánto y cómo cancelar</b>, con casilla de aceptación</li>
+    </ul>
+  </div>
+
+  <h3 style="margin-top:22px">Palabras que va a escuchar</h3>
+  <table>
+    <tr><td style="width:28%"><b>Pasarela / adquirente</b></td><td>La empresa que procesa la tarjeta y le deposita (CardNET o AZUL).</td></tr>
+    <tr><td><b>Afiliación</b></td><td>El contrato con la pasarela. Le dan un "número de afiliado".</td></tr>
+    <tr><td><b>Token</b></td><td>Código que reemplaza la tarjeta para poder cobrar cada mes sin guardarla.</td></tr>
+    <tr><td><b>Cobro recurrente</b></td><td>Cobro automático que se repite (por ejemplo, cada mes).</td></tr>
+    <tr><td><b>Ambiente de pruebas</b></td><td>Versión de práctica donde probamos con tarjetas falsas, sin dinero real.</td></tr>
+    <tr><td><b>Certificación</b></td><td>Revisión técnica que hace la pasarela antes de activar los cobros reales.</td></tr>
+    <tr><td><b>3D Secure</b></td><td>Verificación extra del banco del cliente (código o app) en el primer pago.</td></tr>
+    <tr><td><b>Contracargo</b></td><td>Cuando un cliente reclama un cobro a su banco. Unas políticas claras lo evitan.</td></tr>
+  </table>
+
+  <div class="box amber">
+    <h4>Importante</h4>
+    <ul>
+      <li>Nunca comparta claves ni credenciales por WhatsApp o en grupos. Acordamos un medio seguro.</li>
+      <li>Esta guía se basa en información pública de CardNET, AZUL y BHD a noviembre de 2026. Los requisitos, comisiones y plazos los confirma siempre el oficial de negocios.</li>
+    </ul>
+  </div>
+
+  <div class="box teal">
+    <h4>Su próximo paso</h4>
+    <p>1) Confirme que tiene el RNC y la cuenta. 2) Llame a su ejecutivo de BHD y pida CardNET con lo de la página 6. 3) Avíseme cuando tenga las credenciales de prueba. Mientras tanto, yo empiezo con la página web.</p>
+  </div>
+
+  <div class="footer"><span>Guía de cobro automático · Noviembre 2026</span><span>7 / 7</span></div>
+</section>
+
+</body>
+</html>
